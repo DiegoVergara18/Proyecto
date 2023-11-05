@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
+import { AlertController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-cities',
@@ -16,7 +17,9 @@ export class CitiesPage implements OnInit {
 
   constructor(
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    public toastController: ToastController,
+    public alertController: AlertController
   ) { }
 
   ngOnInit() {
@@ -36,4 +39,47 @@ export class CitiesPage implements OnInit {
     )
   }
 
+  async presentToast1(){
+    const toast = await this.toastController.create({
+      message: 'Ciudad seleccionada',
+      duration: 1500,
+      position: "top"
+    });
+    toast.present()
+
+  }
+  async presentAlert1(){
+    const alert = await this.alertController.create({
+      header:"Borrar ciudad",
+      message: " Se ha borrado la ciudad correctamente",
+      buttons: ["OK"]
+    });
+    await alert.present()
+    let result = await alert.onDidDismiss();
+    console.log(result);
+  }
+  async presentAlert2(){
+    const alert = await this.alertController.create({
+      header:"Borrar ciudad",
+      message: " ¿Estás seguro?",
+      buttons: [
+        {
+          text:'No',
+          handler: () => {
+            console.log(" No cancel")
+          }
+
+        },
+        {
+          text:'Si',
+          handler: () => {
+            console.log("Ciudad Eliminada")
+          }
+        }
+      ]
+    });
+    await alert.present()
+    let result = await alert.onDidDismiss();
+    console.log(result);
+  }
 }

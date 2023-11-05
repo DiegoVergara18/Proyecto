@@ -8,7 +8,7 @@
 
   <ion-row>
     <ion-col sizeLg="6" sizeMd="6" sizeXs="12" *ngFor="let city of cities">
-      <ion-card>
+      <ion-card (click)="presentAlert2()">
         <img src="../../assets/cities-img/{{city.image}}">
         <div class="card-tittle">{{city.name}}</div>
       </ion-card>
