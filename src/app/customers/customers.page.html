@@ -10,6 +10,14 @@
 
 <ion-content>
 
+  
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content
+        refreshingSpinner="bubbles"
+      ></ion-refresher-content>
+    </ion-refresher>
+  
+
 <ion-list *ngIf="permission">
           <ion-item *ngFor="let user of searchedUser">
             <ion-avatar slot="start">
